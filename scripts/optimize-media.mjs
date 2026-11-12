@@ -1,7 +1,7 @@
 // Turns the original files in media-src/ into web-sized files in public/media/.
 // Run with: npm run media
 import sharp from 'sharp';
-import { mkdirSync, copyFileSync, existsSync } from 'node:fs';
+import { mkdirSync, copyFileSync, existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const SRC = 'media-src';
@@ -56,8 +56,26 @@ if (existsSync(join(SRC, 'banner-v2.png'))) {
 }
 
 // App and search icons from the favicon mark; a square logo for Google's knowledge panel.
-for (const [file, size] of [['favicon-32.png', 32], ['apple-touch-icon.png', 180], ['icon-192.png', 192], ['icon-512.png', 512]]) {
-  await sharp(join(SRC, 'favicon.svg'), { density: 600 }).resize(size, size).png().toFile(join('public', file));
+// Google shows a favicon only if it is square and a multiple of 48px, so 48/96/192 are linked first.
+const iconPng = (size) => sharp(join(SRC, 'favicon.svg'), { density: 600 }).resize(size, size).png().toBuffer();
+for (const [file, size] of [['favicon-32.png', 32], ['favicon-48.png', 48], ['favicon-96.png', 96], ['apple-touch-icon.png', 180], ['icon-192.png', 192], ['icon-512.png', 512]]) {
+  await sharp(await iconPng(size)).toFile(join('public', file));
+}
+// favicon.ico at the site root (crawlers look there first): an ICO holding 16, 32 and 48px PNGs
+{
+  const sizes = [16, 32, 48];
+  const pngs = await Promise.all(sizes.map(iconPng));
+  const header = Buffer.alloc(6 + 16 * sizes.length);
+  header.writeUInt16LE(0, 0); header.writeUInt16LE(1, 2); header.writeUInt16LE(sizes.length, 4);
+  let offset = header.length;
+  sizes.forEach((s, i) => {
+    const e = 6 + i * 16;
+    header.writeUInt8(s, e); header.writeUInt8(s, e + 1); // width, height
+    header.writeUInt16LE(1, e + 4); header.writeUInt16LE(32, e + 6); // planes, bit depth
+    header.writeUInt32LE(pngs[i].length, e + 8); header.writeUInt32LE(offset, e + 12);
+    offset += pngs[i].length;
+  });
+  writeFileSync(join('public', 'favicon.ico'), Buffer.concat([header, ...pngs]));
 }
 await sharp(join(SRC, 'logo-v2.png')).resize(512, 512).png().toFile(join(OUT, 'logo-square.png'));
 console.log('icons');
