@@ -1,0 +1,14 @@
+node_modules
+dist
+.vercel
+.env
+.env.local
+.env.*.local
+.taste-skill
+shots
+*.log
+media-src
+
+# design skill: reinstall with `npx skills add` (see skills-lock.json)
+.agents/
+.claude/skills/

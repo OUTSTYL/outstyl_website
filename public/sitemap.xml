@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://outstyl.in/</loc>
+    <lastmod>2026-11-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image><image:loc>https://outstyl.in/media/og.jpg</image:loc></image:image>
+    <image:image><image:loc>https://outstyl.in/media/feat-tryon.webp</image:loc></image:image>
+    <image:image><image:loc>https://outstyl.in/media/feat-size.webp</image:loc></image:image>
+    <image:image><image:loc>https://outstyl.in/media/feat-swipe.webp</image:loc></image:image>
+    <image:image><image:loc>https://outstyl.in/media/feat-curation.webp</image:loc></image:image>
+    <image:image><image:loc>https://outstyl.in/media/urban-front.webp</image:loc></image:image>
+    <image:image><image:loc>https://outstyl.in/media/night-front.webp</image:loc></image:image>
+    <image:image><image:loc>https://outstyl.in/media/street-front.webp</image:loc></image:image>
+    <image:image><image:loc>https://outstyl.in/media/sharp-front.webp</image:loc></image:image>
+    <video:video>
+      <video:thumbnail_loc>https://outstyl.in/media/tryon-1-poster.webp</video:thumbnail_loc>
+      <video:title>OutStyl virtual try on: look 01</video:title>
+      <video:description>Outfits moving on real models, showing drape, fit and flow, in the OutStyl virtual try on.</video:description>
+      <video:content_loc>https://outstyl.in/media/tryon-1.mp4</video:content_loc>
+      <video:duration>5</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://outstyl.in/media/tryon-2-poster.webp</video:thumbnail_loc>
+      <video:title>OutStyl virtual try on: look 02</video:title>
+      <video:description>A second try on look in motion, showing how each garment fits and moves on the body.</video:description>
+      <video:content_loc>https://outstyl.in/media/tryon-2.mp4</video:content_loc>
+      <video:duration>5</video:duration>
+      <video:family_friendly>yes</video:family_friendly>
+    </video:video>
+  </url>
+</urlset>
